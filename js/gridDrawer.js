@@ -3,12 +3,12 @@
     let screenWidth = $window.outerWidth();
 
     const $gridDrawer = $('.gridDrawer');
-    let $gridDrawerItem = $('.gridDrawer').find('.gd__item');
+    let $gridDrawerItem = $gridDrawer.find('.gd__item');
     const animateEasing = 'easeInOutQuint';
     const animateTime = 600;
 
     function setGridDrawerElement() {
-        if ($('.gridDrawer').length) {
+        if ($gridDrawer.length) {
             let $item = $('.gd__item');
             let groupNum = 0;
             const itemNum = 5;
@@ -63,32 +63,38 @@
 
     function setGridDrawerPosition(width) {
         if ($gridDrawer.length) {
-            $('.gd__group').each(function () {
-                let sideWidth = 0;
-                let sideLeft = 0;
-                $(this).children('.gd__side').css({
-                    position: 'absolute'
-                }).each(function (index) {
-                    let $this = $(this);
-                    index <= 0 ? (sideLeft = 0) : (sideLeft = sideWidth);
-                    sideWidth = $this.innerWidth() + sideWidth;
-                    $this.css({
-                        left: sideLeft
+            if (width > 1024) {
+                $('.gd__group').each(function () {
+                    let sideWidth = 0;
+                    let sideLeft = 0;
+                    $(this).children('.gd__side').css({
+                        position: 'absolute'
+                    }).each(function (index) {
+                        let $this = $(this);
+                        index <= 0 ? (sideLeft = 0) : (sideLeft = sideWidth);
+                        sideWidth = $this.innerWidth() + sideWidth;
+                        $this.css({
+                            left: sideLeft
+                        });
                     });
                 });
-            });
+            } else {
+                $('.gd__group .gd__side').attr('style','');
+                $('.gd__group .gd__inside').attr('style','');
+                return false;
+            }
         } else {
             return false;
         }
     }
 
-    function serGridDrawerPosition(el, initIndex, endIndex, offset) {
+    function setGridDrawerSidePosition(el, initIndex, endIndex, offset) {
         for (let i = initIndex; i < endIndex; i++) {
             el.eq(i).css('margin-left', offset);
         }
     }
 
-    function resetGridDrawerPosition(el) {
+    function resetGridDrawerSidePosition(el) {
         if (el == undefined) {
             el = $('.gd__side');
         }
@@ -131,22 +137,32 @@
                 width: mySideWidth
             }, animateTime, animateEasing);
 
-            resetGridDrawerPosition();
+            resetGridDrawerSidePosition();
 
             if (mySideIndex == 2) {
-                serGridDrawerPosition($allSide, 0, 3, '-50%');
+                setGridDrawerSidePosition($allSide, 0, 3, '-50%');
             } else {
                 if (species) {
-                    mySideIndex == 0 ? serGridDrawerPosition($allSide, 1, 3, '50%') : serGridDrawerPosition($allSide, 0, 2, '-50%');
+                    mySideIndex == 0 ? setGridDrawerSidePosition($allSide, 1, 3, '50%') : setGridDrawerSidePosition($allSide, 0, 2, '-50%');
                 } else {
-                    serGridDrawerPosition($allSide, mySideIndex + 1, allSideLength, '50%');
+                    setGridDrawerSidePosition($allSide, mySideIndex + 1, allSideLength, '50%');
                 }
             }
         } else {
             closeGridDrawerInside();
-            resetGridDrawerPosition();
+            resetGridDrawerSidePosition();
         }
     }
+
+    function ctrlGridDrawerSlide(){
+        $('.gd__item').not('.is-open').children('.gd__inside').stop(true, true).slideUp(animateTime);
+        $('.gd__item.is-open').children('.gd__inside').stop(true, true).slideDown(animateTime);
+        return false;
+    }
+
+    $('.gridDrawer .open-btn').on('mousedown', function(e){
+        e.preventDefault();
+    });
 
     $gridDrawer.on('click', function (e) {
         let $el = $(e.target);
@@ -164,7 +180,14 @@
         } else {
             return false;
         }
-        ctrlGridDrawerAnimate($item);
+
+        screenWidth = $window.outerWidth();
+
+        if (screenWidth > 1024) {
+            ctrlGridDrawerAnimate($item);
+        } else {
+            ctrlGridDrawerSlide();
+        }
     });
 
     setGridDrawerElement();
@@ -187,7 +210,7 @@
 
     throttle('resize', 'optimizedResize');
 
-    $window.on('optimizedResize', function(){
+    $window.on('optimizedResize', function () {
         screenWidth = $window.outerWidth();
         setGridDrawerPosition(screenWidth);
     }).trigger('optimizedResize');
