@@ -79,8 +79,9 @@
                     });
                 });
             } else {
-                $('.gd__group .gd__side').attr('style','');
-                $('.gd__group .gd__inside').attr('style','');
+                $('.gd__group .gd__item').removeClass('is-open');
+                $('.gd__group .gd__side').attr('style', '');
+                $('.gd__group .gd__inside').attr('style', '');
                 return false;
             }
         } else {
@@ -154,13 +155,13 @@
         }
     }
 
-    function ctrlGridDrawerSlide(){
+    function ctrlGridDrawerSlide() {
         $('.gd__item').not('.is-open').children('.gd__inside').stop(true, true).slideUp(animateTime);
         $('.gd__item.is-open').children('.gd__inside').stop(true, true).slideDown(animateTime);
         return false;
     }
 
-    $('.gridDrawer .open-btn').on('mousedown', function(e){
+    $('.gridDrawer .open-btn').on('mousedown', function (e) {
         e.preventDefault();
     });
 
