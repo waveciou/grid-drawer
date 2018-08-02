@@ -1,4 +1,5 @@
 # GRID DRAWER
+It's a Grid List with drawer effect.
 這是一個帶有伸縮選單動畫的格子選單
 
 ### DEMO
