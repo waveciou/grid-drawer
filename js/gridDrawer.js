@@ -91,7 +91,13 @@
 
     function setGridDrawerSidePosition(el, initIndex, endIndex, offset) {
         for (let i = initIndex; i < endIndex; i++) {
-            el.eq(i).css('margin-left', offset);
+            el.eq(i).animate({
+                'marginLeft': offset
+            }, {
+                duration: animateTime,
+                easing: animateEasing,
+                queue: false
+            });
         }
     }
 
@@ -99,21 +105,32 @@
         if (el == undefined) {
             el = $('.gd__side');
         }
-        el.css('margin-left', '0%');
+        el.animate({
+            'marginLeft': '0%'
+        }, {
+            duration: animateTime,
+            easing: animateEasing,
+            queue: false
+        });
     }
 
     function closeGridDrawerInside(el) {
         if (el == undefined) {
             el = $gridDrawerItem;
         }
-        el.children('.gd__inside').stop(true, true).animate({
+        el.children('.gd__inside').animate({
             width: '0%'
-        }, animateTime, animateEasing, function () {
-            $(this).css({
-                display: 'none',
-                opacity: 0
-            });
-        });
+        }, {
+            duration: animateTime,
+            easing: animateEasing,
+            queue: false,
+            complete: function () {
+                $(this).css({
+                    display: 'none',
+                    opacity: 0
+                });
+            }
+        })
     }
 
     function ctrlGridDrawerAnimate(item) {
@@ -134,9 +151,13 @@
             item.children('.gd__inside').css({
                 display: 'block',
                 opacity: 1
-            }).stop(true, true).animate({
+            }).animate({
                 width: mySideWidth
-            }, animateTime, animateEasing);
+            }, {
+                duration: animateTime,
+                easing: animateEasing,
+                queue: false
+            });
 
             resetGridDrawerSidePosition();
 
@@ -183,12 +204,7 @@
         }
 
         screenWidth = $window.outerWidth();
-
-        if (screenWidth > 1024) {
-            ctrlGridDrawerAnimate($item);
-        } else {
-            ctrlGridDrawerSlide();
-        }
+        screenWidth > 1024 ? ctrlGridDrawerAnimate($item) : ctrlGridDrawerSlide();
     });
 
     setGridDrawerElement();
