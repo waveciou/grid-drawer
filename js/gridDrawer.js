@@ -91,7 +91,7 @@
 
     function setGridDrawerSidePosition(el, initIndex, endIndex, offset) {
         for (let i = initIndex; i < endIndex; i++) {
-            el.eq(i).animate({
+            el.eq(i).velocity({
                 'marginLeft': offset
             }, {
                 duration: animateTime,
@@ -105,7 +105,7 @@
         if (el == undefined) {
             el = $('.gd__side');
         }
-        el.animate({
+        el.velocity({
             'marginLeft': '0%'
         }, {
             duration: animateTime,
@@ -118,16 +118,16 @@
         if (el == undefined) {
             el = $gridDrawerItem;
         }
-        el.children('.gd__inside').animate({
-            width: '0%'
+        el.children('.gd__inside').velocity({
+            width: '0%',
+            opacity: 0
         }, {
             duration: animateTime,
             easing: animateEasing,
             queue: false,
             complete: function () {
                 $(this).css({
-                    display: 'none',
-                    opacity: 0
+                    display: 'none'
                 });
             }
         })
@@ -149,10 +149,10 @@
             closeGridDrawerInside($gridDrawerItem.not(item));
 
             item.children('.gd__inside').css({
-                display: 'block',
+                display: 'block'
+            }).velocity({
+                width: mySideWidth,
                 opacity: 1
-            }).animate({
-                width: mySideWidth
             }, {
                 duration: animateTime,
                 easing: animateEasing,
