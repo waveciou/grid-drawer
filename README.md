@@ -5,9 +5,8 @@ It's a Grid List with drawer effect.
 ### DEMO
 <https://waveciou.github.io/grid-drawer/index.html>
 
-### Branch
-#### velocity
-使用 (velocity)[https://github.com/julianshapiro/velocity] 製作動畫效果
+### Branch Velocity Version
+使用 [velocity](https://github.com/julianshapiro/velocity) 製作動畫效果
 
 ### 使用技術
 - jQuery v3.2
