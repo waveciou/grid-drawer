@@ -150,6 +150,15 @@ $gdwrap-padding: 20px;
                 color: #fff;
                 margin-bottom: 0px;
             }
+            > img{
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: absolute;
+                left: 0px;
+                top: 0px;
+                object-fit: cover;
+            }
         }
         &.is-open{
             .gd__outside{

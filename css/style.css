@@ -162,6 +162,17 @@
   margin-bottom: 0px;
 }
 
+.gridDrawer .gd__item .gd__wrap > img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .gridDrawer .gd__item.is-open .gd__outside {
   background-color: #cabc00;
 }
