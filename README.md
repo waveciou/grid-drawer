@@ -1,6 +1,6 @@
-# GRID DRAWER
-It's a Grid List with drawer effect.<br>
-這是一個帶有伸縮選單動畫的格子選單
+## GRID DRAWER
+這是一個帶有伸縮選單動畫的格子選單。<br>
+因為很像抽屜，所以我取名叫做 GRID DRAWER
 
 ### DEMO
 <https://waveciou.github.io/grid-drawer/index.html>

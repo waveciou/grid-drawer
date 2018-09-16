@@ -2,12 +2,11 @@
     const $window = $(window);
     let screenWidth = $window.outerWidth();
 
-    const $gridDrawer = $('.gridDrawer');
     const animateEasing = 'easeInOutQuint';
     const animateTime = 600;
 
     function setGridDrawerElement() {
-        if ($gridDrawer.length) {
+        if ($('.gridDrawer').length) {
             let $item = $('.gd__item');
             let groupNum = 0;
             const itemNum = 5;
@@ -61,7 +60,7 @@
     }
 
     function setGridDrawerPosition(width) {
-        if ($gridDrawer.length) {
+        if ($('.gridDrawer').length) {
             if (width > 1024) {
                 $('.gd__group').each(function () {
                     let sideWidth = 0;
@@ -133,7 +132,7 @@
     }
 
     function ctrlGridDrawerAnimate(item) {
-        if ($gridDrawer.find('.is-open').length) {
+        if ($('.gridDrawer').find('.is-open').length) {
 
             let $mySide = item.parents('.gd__side');
             let $myGroup = item.parents('.gd__group');
@@ -185,7 +184,7 @@
         e.preventDefault();
     });
 
-    $gridDrawer.on('click', function (e) {
+    $('.gridDrawer').on('click', function (e) {
         if($('.gridDrawer .gd__inside').is('.velocity-animating') == false){
             let $el = $(e.target);
             let $item = $el.parents('.gd__item');
