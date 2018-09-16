@@ -5,11 +5,13 @@
 ### DEMO
 <https://waveciou.github.io/grid-drawer/index.html>
 
-### 使用技術
+![Grid Drawer Demo Gif](https://waveciou.github.io/grid-drawer/img/demo.gif "Grid Drawer")
+
+### SKILLS
 - jQuery v3.2
 - ES6
 - [velocity v1.5](https://github.com/julianshapiro/velocity)
 
-### 使用工具
+### TOOL
 - SCSS
 - Font Awesome Icon
