@@ -5,7 +5,7 @@
 ### DEMO
 <https://waveciou.github.io/grid-drawer/index.html>
 
-![Grid Drawer Demo Gif](https://waveciou.github.io/grid-drawer/img/demo.gif "Grid Drawer")
+![Grid Drawer Demo Gif](https://waveciou.github.io/grid-drawer/images/demo.gif "Grid Drawer")
 
 ### SKILLS
 - jQuery v3.2
