@@ -1,17 +1,16 @@
-## GRID DRAWER
+# GRID DRAWER
 這是一個帶有伸縮選單動畫的格子選單。<br>
-因為很像抽屜，所以我取名叫做 GRID DRAWER
+因為很像抽屜，所以我取名叫做 GRID DRAWER。
 
-### DEMO
-<https://waveciou.github.io/grid-drawer/index.html>
-
+## DEMO
 ![Grid Drawer Demo Gif](https://waveciou.github.io/grid-drawer/images/demo.gif "Grid Drawer")
 
-### SKILLS
+- [網站連結](https://waveciou.github.io/grid-drawer/)
+
+## SKILLS
 - jQuery v3.2
-- ES6
 - [velocity v1.5](https://github.com/julianshapiro/velocity)
 
-### TOOL
+## TOOL
 - SCSS
 - Font Awesome Icon
