@@ -198,7 +198,7 @@
                 }
             } else if ($el.hasClass('close-btn')) {
                 $item.removeClass('is-open');
-            } else {
+            } else if (!$el.is('a')) {
                 return false;
             }
 
