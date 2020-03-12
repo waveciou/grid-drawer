@@ -16,6 +16,6 @@
 - Font Awesome Icon
 
 ## 使用案例
-- [東北角國家風景區美食單元](https://www.necoast-nsa.gov.tw/Food-Intro.aspx?a=126&l=1)
-- [台灣好湯網泉值單元](https://taiwanhotspring.net/Quality-Intro.aspx?a=51&l=1)
-- [720°VR走進故宮空間導讀單元](https://tech2.npm.edu.tw/720vr/chProject.html)
+- [東北角國家風景區 - 美食單元](https://www.necoast-nsa.gov.tw/Food-Intro.aspx?a=126&l=1)
+- [台灣好湯網 - 泉質單元](https://taiwanhotspring.net/Quality-Intro.aspx?a=51&l=1)
+- [720°VR走進故宮 - 空間導讀單元](https://tech2.npm.edu.tw/720vr/chProject.html)
