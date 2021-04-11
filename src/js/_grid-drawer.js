@@ -72,7 +72,7 @@
             index <= 0 ? (sideLeft = 0) : (sideLeft = sideWidth);
             sideWidth = $this.innerWidth() + sideWidth;
             $this.css({
-              left: sideLeft
+              left: sideleft
             });
           });
         });
@@ -149,12 +149,12 @@
       item.children('.gd__inside').css({
         display: 'block'
       }).velocity({
-        width: mySideWidth,
+        width: mysidewidth,
         opacity: 1
       }, {
-        duration: animateTime,
-        easing: animateEasing,
-        queue: false
+        // duration: animateTime,
+        // easing: animateEasing,
+        // queue: false
       });
 
       resetGridDrawerSidePosition();
