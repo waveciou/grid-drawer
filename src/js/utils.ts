@@ -1,22 +1,18 @@
-export function query (selectors: string) {
-  return document.querySelector(selectors);
-}
 
-export function queryAll (selectors: string) {
-  return document.querySelectorAll(selectors);
-}
-
-export function forEach (array: any, callback: any, scope?: any) {
-  for (let i = 0; i < array.length; i++) {
-    callback.call(scope, i, array[i]);
+export function wrapArrayHandler (nodeList: any, size: number) {
+  let result = [];
+  for (let i = 0; i < nodeList.length; i += size) {
+    let newSlicedArray = Array.prototype.slice.call(nodeList, i, i + size);
+    result.push(newSlicedArray);
   }
+  return result;
 }
 
-export function chunk (array: any, size: number) {
-  let arr = [];
-  for (let i = 0; i < array.length; i += size) {
-    let newSlicedArray = Array.prototype.slice.call(array, i, i + size);
-    arr.push(newSlicedArray);
-  }
-  return arr;
+export function wrapperExecutor (array: any, tagName: string) {
+  return array.map((towrap: any) => {
+    return towrap.reduce((prev: any, element: any) => {
+      prev.appendChild(element);
+      return prev;
+    }, document.createElement(tagName));
+  });
 }
