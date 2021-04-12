@@ -1,7 +1,10 @@
 import '../scss/grid-drawer.scss';
 
 import config from './config';
-import * as utils from './utils';
+
+// * Function
+import wrapArrayHandler from './function/wrapArrayHandler';
+import wrapperExecutor from './function/wrapperExecutor';
 
 declare global {
   interface Window {
@@ -32,9 +35,9 @@ class GridDrawer {
     const { el, classNameItems } = this.CONFIG;
 
     const $items: any = document.querySelectorAll(`${el} > ${classNameItems}`);
-    const groupsArray = utils.wrapArrayHandler($items, this.ITEMS_NUMBER);
+    const groupsArray = wrapArrayHandler($items, this.ITEMS_NUMBER);
 
-    utils.wrapperExecutor(groupsArray, 'div').forEach((groupElement: any, index: number) => {
+    wrapperExecutor(groupsArray, 'div').forEach((groupElement: any, index: number) => {
       const direction: number = index % 2;
       const groupItems: any = groupElement.querySelectorAll(classNameItems);
 
@@ -54,7 +57,7 @@ class GridDrawer {
         itemsArray.push(domArray);
       }
 
-      utils.wrapperExecutor(itemsArray, 'div').forEach((element: any, index: number) => {
+      wrapperExecutor(itemsArray, 'div').forEach((element: any, index: number) => {
         const param: string = `${direction}${index}`;
         const size: string = (param === '00' || param === '12') ? 'l' : 's';
 
