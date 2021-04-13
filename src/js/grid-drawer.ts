@@ -3,8 +3,11 @@ import '../scss/grid-drawer.scss';
 import config from './config';
 
 // * Function
-import wrapArrayHandler from './function/wrapArrayHandler';
-import wrapperExecutor from './function/wrapperExecutor';
+import domGroupHandler from './function/domGroupHandler';
+import domWrapHandler from './function/domWrapHandler';
+import directionGroupHandler from './function/directionGroupHandler';
+import wrapInnerExecutor from './function/wrapInnerExecutor';
+import createCloseBtnExecutor from './function/createCloseBtnExecutor';
 
 declare global {
   interface Window {
@@ -13,51 +16,42 @@ declare global {
 }
 
 class GridDrawer {
+  EL: string;
   CONFIG: any = config;
   GD_CONTAINER: HTMLElement;
   ITEMS_NUMBER: number = 5;
 
-  constructor (payload?: any) {
-    if (typeof payload === 'object') {
-      this.CONFIG = Object.assign(config, payload);
-    }
+  constructor (el: string, options?: any) {
+    this.EL = el;
+    this.CONFIG = Object.assign(config, options);
 
-    const element_node: NodeList = document.querySelectorAll(this.CONFIG.el);
-
+    const element_node: NodeList = document.querySelectorAll(el);
     if (element_node.length < 1) return;
     if (element_node.length > 1) return;
 
-    this.GD_CONTAINER = document.querySelector(this.CONFIG.el);
+    this.GD_CONTAINER = document.querySelector(el);
     this.init();
   }
 
   init () {
-    const { el, classNameItems } = this.CONFIG;
+    const { classNameItems, classNameOutside, classNameInside } = this.CONFIG;
 
-    const $items: any = document.querySelectorAll(`${el} > ${classNameItems}`);
-    const groupsArray = wrapArrayHandler($items, this.ITEMS_NUMBER);
+    const $items: any = document.querySelectorAll(`${this.EL} > ${classNameItems}`);
+    const $outsides: any = document.querySelectorAll(`${this.EL} ${classNameOutside}`);
+    const $insides: any = document.querySelectorAll(`${this.EL} ${classNameInside}`);
 
-    wrapperExecutor(groupsArray, 'div').forEach((groupElement: any, index: number) => {
+    wrapInnerExecutor($outsides, 'gd__wrap');
+    wrapInnerExecutor($insides, 'gd__wrap');
+    createCloseBtnExecutor($insides, 'close-btn');
+
+    const groupsArray = domGroupHandler($items, this.ITEMS_NUMBER);
+
+    domWrapHandler(groupsArray, 'div').forEach((groupElement: any, index: number) => {
       const direction: number = index % 2;
-      const groupItems: any = groupElement.querySelectorAll(classNameItems);
+      const $groupItems: any = groupElement.querySelectorAll(classNameItems);
+      const sidesArray: any = directionGroupHandler($groupItems, direction);
 
-      let itemsArray: any = [];
-
-      for (let i = 0; i < Math.ceil(groupItems.length / 2); i++) {
-        const value: number = i * 2;
-        let begin: number = value;
-        let ended: number = value + 2;
-
-        if (direction === 0) {
-          begin = i > 0 ? value - 1 : 0;
-          ended = i > 0 ? value + 1 : 1;
-        }
-
-        const domArray = Array.prototype.slice.call(groupItems, begin, ended);
-        itemsArray.push(domArray);
-      }
-
-      wrapperExecutor(itemsArray, 'div').forEach((element: any, index: number) => {
+      domWrapHandler(sidesArray, 'div').forEach((element: any, index: number) => {
         const param: string = `${direction}${index}`;
         const size: string = (param === '00' || param === '12') ? 'l' : 's';
 
