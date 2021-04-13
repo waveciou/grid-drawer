@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function wrapInnerExecutor(domList: any, className: string) {
   for (let i = 0; i < domList.length; i++) {
     const innerContent = domList[i].innerHTML;

@@ -10,52 +10,42 @@
 
 .gd__group {
   width: 100%;
-  height: 0;
-  padding-bottom: 50%;
   position: relative;
   overflow: hidden;
-  font-size: 0;
 
-  @include max-width(1024px) {
-    height: auto;
-    padding-bottom: 0;
+  @include min-width(1025px) {
+    height: 0;
+    padding-bottom: 50%;
   }
 }
 
 .gd__side {
-  height: 0;
-  padding-bottom: 50%;
-  display: inline-block;
+  display: block;
   position: relative;
-  vertical-align: top;
 
-  @include max-width(1024px) {
-    height: auto;
-    padding-bottom: 0;
-    display: block;
+  @include min-width(1025px) {
+    height: 0;
+    padding-bottom: 50%;
+    display: inline-block;
+    vertical-align: top;
   }
 
   &.gd__size-l {
-    width: 50%;
+    width: 100%;
 
-    @include max-width(1024px) {
-      width: 100%;
+    @include min-width(1025px) {
+      width: 50%;
     }
   }
 
   &.gd__size-s {
-    width: 25%;
+    width: 100%;
 
-    @include max-width(1024px) {
-      width: 100%;
-    }
-
-    @include max-width(480px) {
-      width: 100%;
+    @include min-width(1025px) {
+      width: 25%;
     }
 
     .gd__item {
-
       @include max-width(1024px) {
         width: 50%;
         height: auto;
@@ -63,38 +53,37 @@
         display: inline-block;
         position: static;
         vertical-align: top;
-
-        .gd__inside {
-          width: 200%;
-          height: 0;
-          padding-bottom: 200%;
-          margin-left: -100%;
-        }
-
-        &:first-child .gd__inside {
-          margin-left: 0%;
-          top: 0%;
-        }
       }
 
       @include max-width(480px) {
         width: 100%;
-
-        .gd__inside {
-          width: 100%;
-          height: 0;
-          padding-bottom: 100%;
-          margin-left: 0%;
-        }
-      }
-
-      .gd__inside {
-        height: 200%;
-        top: -100%;
       }
 
       &:first-child .gd__inside {
         top: 0%;
+
+        @include max-width(1024px) {
+          margin-left: 0%;
+        }
+      }
+    }
+
+    .gd__inside {
+      height: 200%;
+      top: -100%;
+
+      @include max-width(1024px) {
+        width: 200%;
+        height: 0;
+        padding-bottom: 200%;
+        margin-left: -100%;
+      }
+
+      @include max-width(480px) {
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%;
+        margin-left: 0%;
       }
     }
   }
@@ -102,78 +91,12 @@
 
 .gd__item {
   width: 100%;
-  height: 0;
-  padding-bottom: 100%;
+  height: auto;
   position: relative;
 
-  .gd__outside {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: $color-outside;
-    border: $border;
-    transition: all 0.6s;
-
-    @include min-width(1025px) {
-      &:hover {
-        background-color: $color-target;
-      }
-    }
-
-    @include max-width(1024px) {
-      width: 100%;
-      height: 0;
-      padding-bottom: 100%;
-      position: relative;
-    }
-  }
-
-  .gd__inside {
-    width: 0%;
-    height: 100%;
-    display: none;
-    position: absolute;
-    top: 0%;
-    left: 100%;
-    background-color: $color-inside;
-    border: $border;
-    opacity: 0;
-    z-index: 100;
-
-    @include max-width(1024px) {
-      width: 100%;
-      height: 0;
-      padding-bottom: 100%;
-      display: none;
-      position: relative;
-      left: 0%;
-      opacity: 1;
-    }
-  }
-
-  .gd__wrap {
-    width: 100%;
-    height: 100%;
-    padding: $gdwrap-padding;
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 1rem;
-
-    p {
-      color: #fff;
-      margin-bottom: 0;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      object-fit: cover;
-    }
+  @include min-width(1025px) {
+    height: 0;
+    padding-bottom: 100%;
   }
 
   &.is-open {
@@ -181,23 +104,72 @@
       background-color: $color-target;
     }
   }
+}
 
-  @media screen and (max-width: 1024px) {
-    width: 100%;
-    height: auto;
-    padding-bottom: 0;
+.gd__outside {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  position: relative;
+  background-color: $color-outside;
+  border: $border;
+  transition: all 0.6s;
+
+  @include min-width(1025px) {
+    height: 100%;
+    position: absolute;
+
+    &:hover {
+      background-color: $color-target;
+    }
   }
 }
 
-.open-btn {
+.gd__inside {
   width: 100%;
-  height: 100%;
-  display: block;
-  position: absolute;
+  height: 0;
+  padding-bottom: 100%;
+  display: none;
+  position: relative;
   top: 0%;
   left: 0%;
-  text-indent: -9999px;
-  text-decoration: none;
+  background-color: $color-inside;
+  border: $border;
+  opacity: 1;
+  z-index: 100;
+
+  @include min-width(1025px) {
+    width: 0%;
+    height: 100%;
+    padding-bottom: 0;
+    position: absolute;
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.gd__wrap {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1em;
+
+  p {
+    color: $color-white;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
 }
 
 .close-btn {
@@ -205,10 +177,4 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 0;
-
-  &::before {
-    font-size: 1.5rem;
-    color: #fff;
-  }
 }

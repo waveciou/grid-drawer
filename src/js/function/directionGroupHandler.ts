@@ -1,5 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function directionGroupHandler(domList: any, direction: number) {
-  let result: any = [];
+  const result: any = [];
 
   for (let i = 0; i < Math.ceil(domList.length / 2); i++) {
     const value: number = i * 2;

@@ -19,7 +19,7 @@ class GridDrawer {
   EL: string;
   CONFIG: any = config;
   GD_CONTAINER: HTMLElement;
-  ITEMS_NUMBER: number = 5;
+  ITEMS_NUMBER = 5;
 
   constructor (el: string, options?: any) {
     this.EL = el;
@@ -52,7 +52,7 @@ class GridDrawer {
       const sidesArray: any = directionGroupHandler($groupItems, direction);
 
       domWrapHandler(sidesArray, 'div').forEach((element: any, index: number) => {
-        const param: string = `${direction}${index}`;
+        const param = `${direction}${index}`;
         const size: string = (param === '00' || param === '12') ? 'l' : 's';
 
         element.className = `gd__side gd__size-${size}`;

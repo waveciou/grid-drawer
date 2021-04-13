@@ -1,5 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function domGroupHandler(domList: any, size: number) {
-  let result = [];
+  const result = [];
 
   for (let i = 0; i < domList.length; i += size) {
     const group: any = Array.prototype.slice.call(domList, i, i + size);
