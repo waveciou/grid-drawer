@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function createCloseBtnExecutor (domList: any, className: string): void {
   for (let i = 0; i < domList.length; i++) {
     const closeButton = document.createElement('a');

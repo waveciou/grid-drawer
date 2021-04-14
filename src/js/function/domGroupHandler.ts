@@ -1,4 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export default function domGroupHandler(domList: any, size: number) {
   const result = [];
 

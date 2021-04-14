@@ -10,8 +10,8 @@
       let $item = $('.gd__item');
       let groupNum = 0;
       const itemNum = 5;
-      const sizeLargeStr = `<div class="gd__side gd__size-l"></div>`;
-      const sizeSmallStr = `<div class="gd__side gd__size-s"></div>`;
+      const sizeLargeStr = '<div class="gd__side gd__size-l"></div>';
+      const sizeSmallStr = '<div class="gd__side gd__size-s"></div>';
 
       $item.each(function () {
         let $this = $(this);
@@ -25,7 +25,7 @@
 
       for (let i = 0; i < groupNum; i++) {
         let str = `.mark_group-${i + 1}`;
-        $(str).wrapAll(`<div class="gd__group"></div>`);
+        $(str).wrapAll('<div class="gd__group"></div>');
         $item.removeClass(`mark_group-${i + 1}`);
       }
 
@@ -128,7 +128,7 @@
           display: 'none'
         });
       }
-    })
+    });
   }
 
   function ctrlGridDrawerAnimate(item) {
@@ -234,4 +234,4 @@
     setGridDrawerPosition(screenWidth);
   }).trigger('optimizedResize');
 
-})($)
+})($);

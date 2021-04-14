@@ -9,6 +9,9 @@ import directionGroupHandler from './function/directionGroupHandler';
 import wrapInnerExecutor from './function/wrapInnerExecutor';
 import createCloseBtnExecutor from './function/createCloseBtnExecutor';
 
+// * Tools
+import throttle from './function/throttle';
+
 declare global {
   interface Window {
     GridDrawer: any;
@@ -30,10 +33,20 @@ class GridDrawer {
     if (element_node.length > 1) return;
 
     this.GD_CONTAINER = document.querySelector(el);
+    this.GD_CONTAINER.classList.add('gd__container');
     this.init();
   }
 
   init () {
+    this.creatElement();
+    this.setPosition(window.innerWidth);
+
+    window.addEventListener('resize', throttle(() => {
+      this.setPosition(window.innerWidth);
+    }, 100));
+  }
+
+  creatElement () {
     const { classNameItems, classNameOutside, classNameInside } = this.CONFIG;
 
     const $items: any = document.querySelectorAll(`${this.EL} > ${classNameItems}`);
@@ -62,6 +75,30 @@ class GridDrawer {
       groupElement.className = 'gd__group';
       this.GD_CONTAINER.appendChild(groupElement);
     });
+  }
+
+  setPosition (screenWidth: number) {
+    const { classNameItems, classNameInside } = this.CONFIG;
+
+    if (screenWidth > 1024) {
+      const $groups: any = document.querySelectorAll(`${this.EL} .gd__group`);
+
+      Array.prototype.forEach.call($groups, (element: any, index: number) => {
+        const sideWidth = 0;
+        const sideLeft = 0;
+      });
+    } else {
+      const $items: any = document.querySelectorAll(`${this.EL} ${classNameItems}`);
+      const $sides: any = document.querySelectorAll(`${this.EL} .gd__side, ${this.EL} ${classNameInside}`);
+
+      for (let i = 0; i < $items.length; i++) {
+        $items[i].classList.remove('is-open');
+      }
+
+      for (let i = 0; i < $sides.length; i++) {
+        $sides[i].removeAttribute('style');
+      }
+    }
   }
 }
 
