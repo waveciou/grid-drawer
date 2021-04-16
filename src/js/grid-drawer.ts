@@ -3,14 +3,15 @@ import '../scss/grid-drawer.scss';
 import config from './config';
 
 // * Function
-import domGroupHandler from './function/domGroupHandler';
-import domWrapHandler from './function/domWrapHandler';
-import directionGroupHandler from './function/directionGroupHandler';
-import wrapInnerExecutor from './function/wrapInnerExecutor';
-import createCloseBtnExecutor from './function/createCloseBtnExecutor';
+import domGroupHandler from './functions/domGroupHandler';
+import domWrapHandler from './functions/domWrapHandler';
+import directionGroupHandler from './functions/directionGroupHandler';
+import wrapInnerExecutor from './functions/wrapInnerExecutor';
+import createCloseBtnExecutor from './functions/createCloseBtnExecutor';
 
 // * Tools
-import throttle from './function/throttle';
+import throttle from './utils/throttle';
+import getParents from './utils/getParents';
 
 declare global {
   interface Window {
@@ -32,6 +33,8 @@ declare global {
     GD_GROUPS: NodeList;
     GD_SIDES: NodeList;
     GD_ITEMS: NodeList;
+    GD_INSIDES: NodeList;
+    GD_OUTSIDES: NodeList;
 
     constructor (el: string, options?: any) {
       this.EL = el;
@@ -46,17 +49,17 @@ declare global {
     }
 
     init () {
-      const { classNameItems } = this.CONFIG;
+      const { classNameItems, classNameOutside, classNameInside } = this.CONFIG;
       this.creatElement();
 
       this.GD_GROUPS = document.querySelectorAll(`${this.EL} .gd__group`);
       this.GD_SIDES = document.querySelectorAll(`${this.EL} .gd__side`);
       this.GD_ITEMS = document.querySelectorAll(`${this.EL} ${classNameItems}`);
+      this.GD_INSIDES = document.querySelectorAll(`${this.EL} ${classNameInside}`);
+      this.GD_OUTSIDES = document.querySelectorAll(`${this.EL} ${classNameOutside}`);
 
-      window.addEventListener('resize', throttle(() => {
-        this.setPosition(window.innerWidth);
-      }, 100));
-
+      this.GD_CONTAINER.addEventListener('click', this.clickHandler, false);
+      window.addEventListener('resize', this.resizeHandler);
       this.setPosition(window.innerWidth);
     }
 
@@ -92,40 +95,38 @@ declare global {
     }
 
     setPosition (screenWidth: number) {
-      const { classNameInside } = this.CONFIG;
-
       if (screenWidth > 1024) {
         Array.prototype.forEach.call(this.GD_GROUPS, (element: any) => {
-          let sideWidth = 0;
+          let width = 0;
           const $sides = element.querySelectorAll('.gd__side');
 
           Array.prototype.forEach.call($sides, (sideElement: any, index: number) => {
-            sideElement.style.left = `${index < 1 ? 0 : sideWidth}px`;
+            sideElement.style.left = `${index < 1 ? 0 : width}px`;
             sideElement.style.position = 'absolute';
-            sideWidth = sideElement.offsetWidth + sideWidth;
+            width = sideElement.offsetWidth + width;
           });
         });
       } else {
-        const $insides: any = document.querySelectorAll(`${this.EL} ${classNameInside}`);
+        for (let i = 0; i < this.GD_ITEMS.length; i++) {
+          (<Element>this.GD_ITEMS[i]).classList.remove('is-open');
+        }
 
-        Array.prototype.forEach.call($insides, (element: any) => {
-          element.removeAttribute('style');
-        });
+        for (let i = 0; i < this.GD_SIDES.length; i++) {
+          (<Element>this.GD_SIDES[i]).removeAttribute('style');
+        }
 
-        Array.prototype.forEach.call(this.GD_ITEMS, (element: any) => {
-          element.classList.remove('is-open');
-        });
-
-        Array.prototype.forEach.call(this.GD_SIDES, (element: any) => {
-          element.removeAttribute('style');
-        });
+        for (let i = 0; i < this.GD_INSIDES.length; i++) {
+          (<Element>this.GD_INSIDES[i]).removeAttribute('style');
+        }
       }
     }
 
-    setSidePosition (element: any, beginIndex: number, endIndex: number, offset: number) {
+    setSidePosition (elements: any, begin: number, end: number, offset: string) {
       const { animateEasing, animateTime } = this.CONFIG;
-      for (let i = beginIndex; i < endIndex; i++) {
-        Velocity(element, {
+      const _elements = Array.prototype.slice.call(elements, begin, end);
+
+      for (let i = 0; i < _elements.length; i++) {
+        Velocity(_elements[i], {
           'marginLeft': offset
         }, {
           duration: animateTime,
@@ -135,10 +136,74 @@ declare global {
       }
     }
 
-    resetSidePosition (element: any) {
-      if (element == undefined) {
-        element = this.GD_SIDES;
+    resetSidePosition () {
+      const { animateEasing, animateTime } = this.CONFIG;
+
+      Velocity(this.GD_SIDES, {
+        'marginLeft': '0%'
+      }, {
+        duration: animateTime,
+        easing: animateEasing,
+        queue: false
+      });
+    }
+
+    closeInside (elements: any = this.GD_ITEMS) {
+      const { classNameInside, animateEasing, animateTime } = this.CONFIG;
+      const _elements = elements.querySelectorAll(classNameInside);
+
+      for (let i = 0; i < _elements.length; i++) {
+        Velocity(_elements[i], {
+          width: '0%',
+          opacity: 0
+        }, {
+          duration: animateTime,
+          easing: animateEasing,
+          queue: false,
+          complete: () => {
+            _elements[i].style.display = 'none';
+          }
+        });
       }
+    }
+
+    controlAnimation (elements: any) {
+      // 123
+    }
+
+    controlSlide () {
+      // 123
+    }
+
+    // Events
+    clickHandler = (e: any) => {
+      const { classNameOutside } = this.CONFIG;
+      const element = (e.target as Element);
+      const $items = getParents(element, 'gd__item');
+
+      if (element.closest(classNameOutside)) {
+        if ($items.classList.contains('is-open')) {
+          $items.classList.remove('is-open');
+        } else {
+          for (let i = 0; i < this.GD_ITEMS.length; i++) {
+            (<Element>this.GD_ITEMS[i]).classList.remove('is-open');
+          }
+          $items.classList.add('is-open');
+        }
+      } else if (element.classList.contains('close-btn')) {
+        $items.classList.remove('is-open');
+      } else {
+        return false;
+      }
+
+      window.innerWidth > 1024 ? this.controlAnimation($items) : this.controlSlide();
+      return false;
+    }
+
+    resizeHandler = () => {
+      throttle(() => {
+        this.setPosition(window.innerWidth);
+      }, 600).apply(this);
     }
   }
 

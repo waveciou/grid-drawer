@@ -16,7 +16,7 @@
     "module": "es6",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": false,
     "noImplicitReturns": true,
     "noImplicitAny": true,
