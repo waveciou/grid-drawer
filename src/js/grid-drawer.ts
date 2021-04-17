@@ -74,6 +74,10 @@ declare global {
 
       wrapInnerExecutor($outsides, 'gd__wrap');
       wrapInnerExecutor($insides, 'gd__wrap');
+
+      const $insideWrap: any = document.querySelectorAll(`${this.EL} ${classNameInside} .gd__wrap`);
+      wrapInnerExecutor($insideWrap, 'gd__content');
+
       createCloseBtnExecutor($insides, 'close-btn');
 
       const groupsArray = domGroupHandler($items, this.ITEMS_NUMBER);
