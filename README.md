@@ -4,7 +4,7 @@
 
 自製的伸縮動畫的格子選單 Plugin，因為效果長得很像抽屜，所以取名叫做 「Grid Drawer」。
 
-![Grid Drawer Demo Gif](https://waveciou.github.io/grid-drawer/img/demo.gif "Grid Drawer")
+![Grid Drawer Demo](https://waveciou.github.io/grid-drawer/img/demo.gif "Grid Drawer Demo")
 
 ## Usage
 
