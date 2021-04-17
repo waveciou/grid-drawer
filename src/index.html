@@ -25,7 +25,8 @@
     <meta name="msapplication-TileImage" content="./img/favicon/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" href="./css/grid-drawer.min.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/grid-drawer.css" />
   </head>
   <body>
     <style>
@@ -42,53 +43,54 @@
     <div class="wrap">
       <div id="gridDrawer">
         <div class="gd__item">
-          <div class="gd__outside">1</div>
-          <div class="gd__inside">1</div>
+          <div class="gd__outside">Block 1</div>
+          <div class="gd__inside">Some cotent in Block 1</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">2</div>
-          <div class="gd__inside">2</div>
+          <div class="gd__outside">Block 2</div>
+          <div class="gd__inside">Some cotent in Block 2</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">3</div>
-          <div class="gd__inside">3</div>
+          <div class="gd__outside">Block 3</div>
+          <div class="gd__inside">Some cotent in Block 3</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">4</div>
-          <div class="gd__inside">4</div>
+          <div class="gd__outside">Block 4</div>
+          <div class="gd__inside">Some cotent in Block 4</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">5</div>
-          <div class="gd__inside">5</div>
+          <div class="gd__outside">Block 5</div>
+          <div class="gd__inside">Some cotent in Block 5</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">6</div>
-          <div class="gd__inside">6</div>
+          <div class="gd__outside">Block 6</div>
+          <div class="gd__inside">Some cotent in Block 6</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">7</div>
-          <div class="gd__inside">7</div>
+          <div class="gd__outside">Block 7</div>
+          <div class="gd__inside">Some cotent in Block 7</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">8</div>
-          <div class="gd__inside">8</div>
+          <div class="gd__outside">Block 8</div>
+          <div class="gd__inside">Some cotent in Block 8</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">9</div>
-          <div class="gd__inside">9</div>
+          <div class="gd__outside">Block 9</div>
+          <div class="gd__inside">Some cotent in Block 9</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">10</div>
-          <div class="gd__inside">10</div>
+          <div class="gd__outside">Block 10</div>
+          <div class="gd__inside">Some cotent in Block 10</div>
         </div>
       </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.6/velocity.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.min.js"></script> -->
-    <script src="./js/grid-drawer.min.js"></script>
+    <script src="./js/grid-drawer.js"></script>
     <script>
-      const gridDrawer = new GridDrawer('#gridDrawer');
+      ;(function () {
+        const gridDrawer = new GridDrawer('#gridDrawer');
+      })();
     </script>
   </body>
 </html>

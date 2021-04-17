@@ -1,19 +1,17 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// 環境變數
-console.log(process.env.NODE_ENV);
-
 module.exports = {
   entry: {
-    'grid-drawer': path.resolve(__dirname, './src/js/grid-drawer.ts')
+    'grid-drawer': path.resolve(__dirname, './src/js/grid-drawer.ts'),
+    'reset': path.resolve(__dirname, './src/scss/reset.scss')
   },
   output: {
-    filename: './js/[name].min.js',
+    filename: './js/[name].js',
     path: path.resolve(__dirname, './dist')
   },
   target: ['web', 'es5'],
@@ -67,8 +65,9 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: './css/[name].min.css'
+      filename: './css/[name].css'
     }),
+    new IgnoreEmitPlugin(['reset.js']),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: './src/index.html',

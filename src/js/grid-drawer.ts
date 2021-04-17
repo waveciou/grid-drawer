@@ -200,12 +200,12 @@ declare global {
 
         this.resetSidePosition();
 
-        // 左
+        // LIFT
         // 1 false: 1, 3, '50%'
         // 2 false: 0, 2, '-50%'
         // 3 false: 0, 3, '-50%'
 
-        // 右
+        // RIGHT
         // 1 true: 1, 3, '50%'
         // 2 true: 2, 3, '50%'
         // 3 true: 0, 3, '-50%'
@@ -225,7 +225,6 @@ declare global {
         }
 
         this.setSidePosition($allSides, config.begin, config.end, config.offset);
-
       } else {
         this.closeInside();
         this.resetSidePosition();
@@ -233,7 +232,15 @@ declare global {
     }
 
     controlSlide () {
-      // 123
+      const { classNameInside } = this.CONFIG;
+
+      Array.prototype.forEach.call(this.GD_ITEMS, (element: any) => {
+        const $inside = element.querySelector(classNameInside);
+        const isOpen = element.classList.contains('is-open');
+        $inside.style.display = isOpen ? 'block' : 'none';
+      });
+
+      return false;
     }
 
     // Events
