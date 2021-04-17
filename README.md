@@ -1,16 +1,18 @@
 # Grid Drawer
 
-[Demo](https://waveciou.github.io/grid-drawer/)
+The grid list plugin by JavaScript, because effect like drawer so name as "Grid Drawer".
 
-自製的伸縮動畫的格子選單 Plugin，因為效果長得很像抽屜，所以取名叫做 「Grid Drawer」。
+![Grid Drawer demo gif](https://waveciou.github.io/grid-drawer/img/demo.gif "Grid Drawer demo gif")
 
-![Grid Drawer Demo](https://waveciou.github.io/grid-drawer/img/demo.gif "Grid Drawer Demo")
+## Demo
+
+[https://waveciou.github.io/grid-drawer](https://waveciou.github.io/grid-drawer/)
 
 ## Usage
 
-### 1. CSS & JS Files
+### 1. Include CSS & JS Files
 
-Grid Drawer 的動畫效果是使用 [velocity.js](https://github.com/julianshapiro/velocity) 製作的，必須要先載入此動畫函式庫才可以使用。
+The animation effect is used by [velocity.js](https://github.com/julianshapiro/velocity), so you must be import this animation library before use plugin.
 
 ```html
 <!DOCTYPE html>
@@ -29,24 +31,24 @@ Grid Drawer 的動畫效果是使用 [velocity.js](https://github.com/julianshap
 
 ### 2. Add Grid Drawer HTML Layout
 
-依照此 HTML 結構添加每個區塊對應的標題與內容項目。
+In your HTML file, join your inside and outside content.
 
 ```html
 <div id="gridDrawer">
   <div class="gd__item">
     <div class="gd__outside">
-      區塊1的標題...
+      The headline in block 01
     </div>
     <div class="gd__inside">
-      區塊1的內容...
+      Some content in block 01...
     </div>
   </div>
   <div class="gd__item">
     <div class="gd__outside">
-      區塊2的標題...
+      The headline in block 02
     </div>
     <div class="gd__inside">
-      區塊2的內容...
+      Some content in block 02...
     </div>
   </div>
   ....
@@ -55,7 +57,7 @@ Grid Drawer 的動畫效果是使用 [velocity.js](https://github.com/julianshap
 
 ### 3. Initialize
 
-Grid Drawer 會以每 5 個區塊為群組來處理，並包含 RWD 自適應效果。
+The grid system is execute with one group of five items, and include responsive web design.
 
 ```js
 // default
@@ -75,11 +77,11 @@ const gridDrawer = new GridDrawer('#gridDrawer', {
 
 | Parameter        | Type     | Default          | Description |
 | --------------   | -------- | ---------------- | ------------ |
-| classNameItems   | string   | '.gd__item'      | 區塊項目的 Class Name |
-| classNameOutside | string   | '.gd__outside'   | 區塊標題的 Class Name |
-| classNameInside  | string   | '.gd__inside'    | 區塊內容的 Class Name |
-| animateEasing    | string   | 'easeInOutQuint' | 動畫的 Easing Name，可以至[這裡](http://velocityjs.org/#easing)，查看更多相關資訊。 |
-| animateTime      | number   | 600              | 動畫的持續時間 |
+| classNameItems   | string   | '.gd__item'      | Class name of block item |
+| classNameOutside | string   | '.gd__outside'   | Class name of outside div |
+| classNameInside  | string   | '.gd__inside'    | Class name of inside div |
+| animateEasing    | string   | 'easeInOutQuint' | The animation easing name, you can get [here](http://velocityjs.org/#easing) to read more information |
+| animateTime      | number   | 600              | The animation duration |
 
 ## Instance
 - [東北角國家風景區 - 美食單元](https://www.necoast-nsa.gov.tw/Food-Intro.aspx?a=126&l=1)
