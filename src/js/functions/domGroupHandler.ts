@@ -1,8 +1,8 @@
-export default function domGroupHandler(domList: any, size: number) {
-  const result = [];
+export default function domGroupHandler(elementList: NodeList, size: number):HTMLElement[][] {
+  const result: HTMLElement[][] = [];
 
-  for (let i = 0; i < domList.length; i += size) {
-    const group: any = Array.prototype.slice.call(domList, i, i + size);
+  for (let i = 0; i < elementList.length; i += size) {
+    const group: HTMLElement[] = Array.prototype.slice.call(elementList, i, i + size);
     result.push(group);
   }
 

@@ -1,8 +1,9 @@
-export default function getIndex (element: any) {
+export default function getIndex (element: Element) {
   if (!element) return -1;
-  let i = 0;
+
+  let index = 0;
   do {
-    i++;
+    index++;
   } while (element = element.previousElementSibling);
-  return i;
+  return index;
 }
