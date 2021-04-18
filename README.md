@@ -1,6 +1,6 @@
 # Grid Drawer
 
-The grid list plugin by JavaScript, because effect like drawer so name as "Grid Drawer".
+The grid list plugin for JavaScript, because the effect just like drawer so name as "Grid Drawer".
 
 ![Grid Drawer demo gif](https://waveciou.github.io/grid-drawer/img/demo.gif "Grid Drawer demo gif")
 
@@ -17,10 +17,10 @@ The animation effect is used by [velocity.js](https://github.com/julianshapiro/v
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  ...
-  <link rel="stylesheet" href="./css/grid-drawer.css" />
-</head>
+  <head>
+    ...
+    <link rel="stylesheet" href="./css/grid-drawer.css" />
+  </head>
 <body>
   ...
   <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.6/velocity.min.js"></script>
@@ -36,20 +36,12 @@ In your HTML file, join your inside and outside content.
 ```html
 <div id="gridDrawer">
   <div class="gd__item">
-    <div class="gd__outside">
-      The headline in block 01
-    </div>
-    <div class="gd__inside">
-      Some content in block 01...
-    </div>
+    <div class="gd__outside">the headline in block 01</div>
+    <div class="gd__inside">some contents in block 01...</div>
   </div>
   <div class="gd__item">
-    <div class="gd__outside">
-      The headline in block 02
-    </div>
-    <div class="gd__inside">
-      Some content in block 02...
-    </div>
+    <div class="gd__outside">the headline in block 02</div>
+    <div class="gd__inside">some contents in block 02...</div>
   </div>
   ....
 </div>
@@ -77,11 +69,11 @@ const gridDrawer = new GridDrawer('#gridDrawer', {
 
 | Parameter        | Type     | Default          | Description |
 | --------------   | -------- | ---------------- | ------------ |
-| classNameItems   | string   | '.gd__item'      | Class name of block item |
-| classNameOutside | string   | '.gd__outside'   | Class name of outside div |
-| classNameInside  | string   | '.gd__inside'    | Class name of inside div |
-| animateEasing    | string   | 'easeInOutQuint' | The animation easing name, you can get [here](http://velocityjs.org/#easing) to read more information |
-| animateTime      | number   | 600              | The animation duration |
+| classNameItems   | string   | '.gd__item'      | class name of block item |
+| classNameOutside | string   | '.gd__outside'   | class name of outside div |
+| classNameInside  | string   | '.gd__inside'    | class name of inside div |
+| animateEasing    | string   | 'easeInOutQuint' | the animation easing name, you can get [here](http://velocityjs.org/#easing) to read more information |
+| animateTime      | number   | 600              | the animation duration |
 
 ## Instance
 - [東北角國家風景區 - 美食單元](https://www.necoast-nsa.gov.tw/Food-Intro.aspx?a=126&l=1)
