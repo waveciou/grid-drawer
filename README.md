@@ -12,7 +12,7 @@ The grid list plugin for JavaScript, because the effect just like drawer so name
 
 ### 1. Include CSS & JS Files
 
-The animation effect is used by [velocity.js](https://github.com/julianshapiro/velocity), so you must be import this animation library before use plugin.
+The animation effects is used by [velocity.js](https://github.com/julianshapiro/velocity), so you must be import this animation library before use plugin.
 
 ```html
 <!DOCTYPE html>
@@ -21,27 +21,27 @@ The animation effect is used by [velocity.js](https://github.com/julianshapiro/v
     ...
     <link rel="stylesheet" href="./css/grid-drawer.css" />
   </head>
-<body>
-  ...
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.6/velocity.min.js"></script>
-  <script src="./js/grid-drawer.js"></script>
-</body>
+  <body>
+    ...
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.6/velocity.min.js"></script>
+    <script src="./js/grid-drawer.js"></script>
+  </body>
 </html>
 ```
 
 ### 2. Add Grid Drawer HTML Layout
 
-In your HTML file, join your inside and outside content.
+In your HTML file, join your inside and outside contents.
 
 ```html
 <div id="gridDrawer">
   <div class="gd__item">
-    <div class="gd__outside">the headline in block 01</div>
-    <div class="gd__inside">some contents in block 01...</div>
+    <div class="gd__outside">headline of block 01</div>
+    <div class="gd__inside">contents of block 01...</div>
   </div>
   <div class="gd__item">
-    <div class="gd__outside">the headline in block 02</div>
-    <div class="gd__inside">some contents in block 02...</div>
+    <div class="gd__outside">headline of block 02</div>
+    <div class="gd__inside">contents of block 02...</div>
   </div>
   ....
 </div>

@@ -1,6 +1,6 @@
-export default function getNotElements (elements: any, target: any) {
-  const _elements = Array.from(elements);
-  const index = _elements.indexOf(target);
-  Array.prototype.splice.call(_elements, index, 1);
-  return _elements;
+export default function getNotElements (elementList: NodeList, target: HTMLElement) {
+  const _elementList = Array.from(elementList);
+  const index: number = _elementList.indexOf(target);
+  Array.prototype.splice.call(_elementList, index, 1);
+  return _elementList.map((element: HTMLElement) => element);
 }

@@ -22,14 +22,29 @@ declare global {
   }
 }
 
+interface iConfig {
+  classNameItems?: string;
+  classNameOutside?: string;
+  classNameInside?: string;
+  animateEasing?: string;
+  animateTime?: number;
+}
+
+interface iSidePositionParam {
+  begin: number;
+  end: number;
+  offset: string;
+}
+
 (function(Velocity) {
   if (Velocity === undefined) {
-    console.error('Please import Velocity.js in this files.');
+    console.error('Please import Velocity.js in your file.');
+    return;
   }
 
   class GridDrawer {
     EL: string;
-    CONFIG: any = config;
+    CONFIG: iConfig = config;
     ITEMS_NUMBER = 5;
     GD_CONTAINER: HTMLElement;
     GD_GROUPS: NodeList;
@@ -38,16 +53,22 @@ declare global {
     GD_INSIDES: NodeList;
     GD_OUTSIDES: NodeList;
 
-    constructor (el: string, options?: any) {
+    constructor (el: string, options?: iConfig) {
       this.EL = el;
       this.CONFIG = Object.assign(config, options);
 
-      const element_node: NodeList = document.querySelectorAll(el);
-      if (element_node.length !== 1) return;
+      const elementList: NodeList = document.querySelectorAll(el);
+
+      if (elementList.length !== 1) {
+        console.error('You must assign one element.');
+        return;
+      }
 
       this.GD_CONTAINER = document.querySelector(el);
       this.GD_CONTAINER.classList.add('gd__container');
       this.init();
+
+      getParents(this.GD_CONTAINER, '.aaa');
     }
 
     init () {
@@ -68,26 +89,26 @@ declare global {
     creatElement () {
       const { classNameItems, classNameOutside, classNameInside } = this.CONFIG;
 
-      const $items: any = document.querySelectorAll(`${this.EL} > ${classNameItems}`);
-      const $outsides: any = document.querySelectorAll(`${this.EL} ${classNameOutside}`);
-      const $insides: any = document.querySelectorAll(`${this.EL} ${classNameInside}`);
+      const $items: NodeList = document.querySelectorAll(`${this.EL} > ${classNameItems}`);
+      const $outsides: NodeList = document.querySelectorAll(`${this.EL} ${classNameOutside}`);
+      const $insides: NodeList = document.querySelectorAll(`${this.EL} ${classNameInside}`);
 
       wrapInnerExecutor($outsides, 'gd__wrap');
       wrapInnerExecutor($insides, 'gd__wrap');
 
-      const $insideWrap: any = document.querySelectorAll(`${this.EL} ${classNameInside} .gd__wrap`);
+      const $insideWrap: NodeList = document.querySelectorAll(`${this.EL} ${classNameInside} .gd__wrap`);
       wrapInnerExecutor($insideWrap, 'gd__content');
 
       createCloseBtnExecutor($insides, 'close-btn');
 
-      const groupsArray = domGroupHandler($items, this.ITEMS_NUMBER);
+      const groupsArray: HTMLElement[][] = domGroupHandler($items, this.ITEMS_NUMBER);
 
-      domWrapHandler(groupsArray, 'div').forEach((groupElement: any, index: number) => {
+      domWrapHandler(groupsArray, 'div').forEach((groupElement: HTMLElement, index: number) => {
         const direction: number = index % 2;
-        const $groupItems: any = groupElement.querySelectorAll(classNameItems);
-        const sidesArray: any = directionGroupHandler($groupItems, direction);
+        const $groupItems: NodeList = groupElement.querySelectorAll(classNameItems);
+        const sidesArray: HTMLElement[][] = directionGroupHandler($groupItems, direction);
 
-        domWrapHandler(sidesArray, 'div').forEach((element: any, index: number) => {
+        domWrapHandler(sidesArray, 'div').forEach((element: HTMLElement, index: number) => {
           const param = `${direction}${index}`;
           const size: string = (param === '00' || param === '12') ? 'l' : 's';
 
@@ -102,11 +123,11 @@ declare global {
 
     setPosition (screenWidth: number) {
       if (screenWidth > 1024) {
-        Array.prototype.forEach.call(this.GD_GROUPS, (element: any) => {
+        Array.prototype.forEach.call(this.GD_GROUPS, (element: HTMLElement) => {
           let width = 0;
-          const $sides = element.querySelectorAll('.gd__side');
+          const $sides: NodeList = element.querySelectorAll('.gd__side');
 
-          Array.prototype.forEach.call($sides, (sideElement: any, index: number) => {
+          Array.prototype.forEach.call($sides, (sideElement: HTMLElement, index: number) => {
             sideElement.style.left = `${index < 1 ? 0 : width}px`;
             sideElement.style.position = 'absolute';
             width = sideElement.offsetWidth + width;
@@ -114,32 +135,30 @@ declare global {
         });
       } else {
         for (let i = 0; i < this.GD_ITEMS.length; i++) {
-          (<Element>this.GD_ITEMS[i]).classList.remove('is-open');
+          (<HTMLElement>this.GD_ITEMS[i]).classList.remove('is-open');
         }
 
         for (let i = 0; i < this.GD_SIDES.length; i++) {
-          (<Element>this.GD_SIDES[i]).removeAttribute('style');
+          (<HTMLElement>this.GD_SIDES[i]).removeAttribute('style');
         }
 
         for (let i = 0; i < this.GD_INSIDES.length; i++) {
-          (<Element>this.GD_INSIDES[i]).removeAttribute('style');
+          (<HTMLElement>this.GD_INSIDES[i]).removeAttribute('style');
         }
       }
     }
 
-    setSidePosition (elements: any, begin: number, end: number, offset: string) {
+    setSidePosition (elementList: NodeList, begin: number, end: number, offset: string) {
       const { animateEasing, animateTime } = this.CONFIG;
-      const _elements = Array.prototype.slice.call(elements, begin, end);
+      const _elementList: HTMLElement[] = Array.prototype.slice.call(elementList, begin, end);
 
-      for (let i = 0; i < _elements.length; i++) {
-        Velocity(_elements[i], {
-          'marginLeft': offset
-        }, {
-          duration: animateTime,
-          easing: animateEasing,
-          queue: false
-        });
-      }
+      Velocity(_elementList, {
+        'marginLeft': offset
+      }, {
+        duration: animateTime,
+        easing: animateEasing,
+        queue: false
+      });
     }
 
     resetSidePosition () {
@@ -154,37 +173,37 @@ declare global {
       });
     }
 
-    closeInside (elements: any = this.GD_ITEMS) {
+    closeInside (elementList: HTMLElement[] | NodeList) {
       const { classNameInside, animateEasing, animateTime } = this.CONFIG;
 
-      Array.prototype.forEach.call(elements, (element: any) => {
-        const _elements = element.querySelectorAll(classNameInside);
+      Array.prototype.forEach.call(elementList, (element: HTMLElement) => {
+        const sideElementList = element.querySelectorAll(classNameInside);
 
-        Velocity(_elements, {
+        Velocity(sideElementList, {
           width: '0%',
           opacity: 0
         }, {
           duration: animateTime,
           easing: animateEasing,
           queue: false,
-          complete: () => {
-            for (let i = 0; i < _elements.length; i++) {
-              _elements[i].style.display = 'none';
+          complete: (sideElements: HTMLElement[]) => {
+            for (let i = 0; i < sideElements.length; i ++) {
+              sideElements[i].style.display = 'none';
             }
           }
         });
       });
     }
 
-    controlAnimation (element: any) {
+    controlAnimation (element: HTMLElement) {
       const { classNameInside, animateEasing, animateTime } = this.CONFIG;
 
       if (this.GD_CONTAINER.querySelectorAll('.is-open').length) {
-        const $side = getParents(element, 'gd__side');
-        const $group = getParents(element, 'gd__group');
-        const $allSides = $group.querySelectorAll('.gd__side');
-        const $inside = element.querySelector(classNameInside);
-        const index = getIndex($side);
+        const $side: HTMLElement = getParents(element, 'gd__side');
+        const $group: HTMLElement = getParents(element, 'gd__group');
+        const $allSides: NodeList = $group.querySelectorAll('.gd__side');
+        const $inside: HTMLElement = element.querySelector(classNameInside);
+        const index: number = getIndex($side);
 
         const sideWidth: string = $side.classList.contains('gd__size-l') === true ? '100%' : '200%';
         const species: boolean = getIndex($group) % 2 === 0 ? true : false;
@@ -214,7 +233,7 @@ declare global {
         // 2 true: 2, 3, '50%'
         // 3 true: 0, 3, '-50%'
 
-        const config = { begin: 1, end: 3, offset: '50%' };
+        const config: iSidePositionParam = { begin: 1, end: 3, offset: '50%' };
 
         switch(index) {
         case 2:
@@ -230,7 +249,7 @@ declare global {
 
         this.setSidePosition($allSides, config.begin, config.end, config.offset);
       } else {
-        this.closeInside();
+        this.closeInside(this.GD_ITEMS);
         this.resetSidePosition();
       }
     }
@@ -238,9 +257,9 @@ declare global {
     controlSlide () {
       const { classNameInside } = this.CONFIG;
 
-      Array.prototype.forEach.call(this.GD_ITEMS, (element: any) => {
-        const $inside = element.querySelector(classNameInside);
-        const isOpen = element.classList.contains('is-open');
+      Array.prototype.forEach.call(this.GD_ITEMS, (element: HTMLElement) => {
+        const $inside: HTMLElement = element.querySelector(classNameInside);
+        const isOpen: boolean = element.classList.contains('is-open');
         $inside.style.display = isOpen ? 'block' : 'none';
       });
 
@@ -248,23 +267,23 @@ declare global {
     }
 
     // Events
-    clickHandler = (e: any) => {
-      const isAnimating = Array.prototype.some.call(this.GD_INSIDES, (element: any) => {
+    clickHandler = (e: MouseEvent) => {
+      const isAnimating = Array.prototype.some.call(this.GD_INSIDES, (element: HTMLElement) => {
         return element.classList.contains('velocity-animating') === true;
       });
 
       if (isAnimating) return false;
 
       const { classNameOutside } = this.CONFIG;
-      const element = (e.target as Element);
-      const $item = getParents(element, 'gd__item');
+      const element = (e.target as HTMLElement);
+      const $item: HTMLElement = getParents(element, 'gd__item');
 
       if (element.closest(classNameOutside)) {
         if ($item.classList.contains('is-open')) {
           $item.classList.remove('is-open');
         } else {
           for (let i = 0; i < this.GD_ITEMS.length; i++) {
-            (<Element>this.GD_ITEMS[i]).classList.remove('is-open');
+            (<HTMLElement>this.GD_ITEMS[i]).classList.remove('is-open');
           }
           $item.classList.add('is-open');
         }
@@ -286,6 +305,6 @@ declare global {
   }
 
   if (typeof window.GridDrawer === 'undefined') {
-    window.GridDrawer = GridDrawer;
+    window.GridDrawer = GridDrawer || {};
   }
 })(window.Velocity);

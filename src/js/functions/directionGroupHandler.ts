@@ -1,7 +1,7 @@
-export default function directionGroupHandler(domList: any, direction: number) {
-  const result: any = [];
+export default function directionGroupHandler(elementList: NodeList, direction: number):HTMLElement[][] {
+  const result: HTMLElement[][] = [];
 
-  for (let i = 0; i < Math.ceil(domList.length / 2); i++) {
+  for (let i = 0; i < Math.ceil(elementList.length / 2); i++) {
     const value: number = i * 2;
     let begin: number = value;
     let ended: number = value + 2;
@@ -11,8 +11,8 @@ export default function directionGroupHandler(domList: any, direction: number) {
       ended = i > 0 ? value + 1 : 1;
     }
 
-    const domArray = Array.prototype.slice.call(domList, begin, ended);
-    result.push(domArray);
+    const elementArray: HTMLElement[] = Array.prototype.slice.call(elementList, begin, ended);
+    result.push(elementArray);
   }
 
   return result;

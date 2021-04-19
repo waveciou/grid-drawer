@@ -1,6 +1,6 @@
-export default function wrapInnerExecutor(domList: any, className: string) {
-  for (let i = 0; i < domList.length; i++) {
-    const innerContent = domList[i].innerHTML;
-    domList[i].innerHTML = `<div class="${className}">${innerContent}</div>`;
+export default function wrapInnerExecutor(elementList: NodeList, className: string):void {
+  for (let i = 0; i < elementList.length; i++) {
+    const innerContent: string = (<HTMLElement>elementList[i]).innerHTML;
+    (<HTMLElement>elementList[i]).innerHTML = `<div class="${className}">${innerContent}</div>`;
   }
 }

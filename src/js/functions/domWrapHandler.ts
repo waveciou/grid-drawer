@@ -1,6 +1,6 @@
-export default function domWrapHandler(domList: any, tagName: string) {
-  return domList.map((towrap: any) => {
-    return towrap.reduce((prev: any, element: any) => {
+export default function domWrapHandler(elementList: HTMLElement[][], tagName: string):HTMLElement[] {
+  return elementList.map((towrap: HTMLElement[]) => {
+    return towrap.reduce((prev: HTMLElement, element: HTMLElement) => {
       prev.appendChild(element);
       return prev;
     }, document.createElement(tagName));
