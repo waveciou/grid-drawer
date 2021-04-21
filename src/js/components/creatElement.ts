@@ -6,6 +6,7 @@ import createCloseBtnExecutor from '../functions/createCloseBtnExecutor';
 
 export default function creatElement():void {
   const { classNameItems, classNameOutside, classNameInside } = this.CONFIG;
+  const ITEMS_NUMBER = 5;
 
   const $items: NodeList = document.querySelectorAll(`${this.EL} > ${classNameItems}`);
   const $outsides: NodeList = document.querySelectorAll(`${this.EL} ${classNameOutside}`);
@@ -19,7 +20,7 @@ export default function creatElement():void {
 
   createCloseBtnExecutor($insides, 'close-btn');
 
-  const groupsArray: HTMLElement[][] = domGroupHandler($items, this.ITEMS_NUMBER);
+  const groupsArray: HTMLElement[][] = domGroupHandler($items, ITEMS_NUMBER);
 
   domWrapHandler(groupsArray, 'div').forEach((groupElement: HTMLElement, index: number) => {
     const direction: number = index % 2;

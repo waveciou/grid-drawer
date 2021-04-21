@@ -7,8 +7,8 @@ import creatElement from './components/creatElement';
 import setPosition from './components/setPosition';
 
 // * Events
-import clickHandler from './events/clickHandler';
-import resizeHandler from './events/resizeHandler';
+import _clickHandler from './events/clickHandler';
+import _resizeHandler from './events/resizeHandler';
 
 declare global {
   interface Window {
@@ -34,7 +34,6 @@ interface iConfig {
   class GridDrawer {
     EL: string;
     CONFIG: iConfig = config;
-    ITEMS_NUMBER = 5;
     GD_CONTAINER: HTMLElement;
     GD_GROUPS: NodeList;
     GD_SIDES: NodeList;
@@ -56,15 +55,6 @@ interface iConfig {
       this.GD_CONTAINER = document.querySelector(el);
       this.GD_CONTAINER.classList.add('gd__container');
 
-      // * Events
-      const _clickHandler = (e: MouseEvent) => {
-        clickHandler.call(this, e);
-      };
-
-      const _resizeHandler = () => {
-        resizeHandler.call(this);
-      };
-
       // * Initialize
       const { classNameItems, classNameOutside, classNameInside } = this.CONFIG;
       creatElement.call(this);
@@ -75,11 +65,20 @@ interface iConfig {
       this.GD_INSIDES = document.querySelectorAll(`${this.EL} ${classNameInside}`);
       this.GD_OUTSIDES = document.querySelectorAll(`${this.EL} ${classNameOutside}`);
 
-      this.GD_CONTAINER.addEventListener('click', _clickHandler, false);
-      window.addEventListener('resize', _resizeHandler);
+      this.GD_CONTAINER.addEventListener('click', this.clickHandler, false);
+      window.addEventListener('resize', this.resizeHandler);
 
       setPosition.call(this, window.innerWidth);
     }
+
+    // * Events
+    clickHandler = (e: MouseEvent) => {
+      _clickHandler.call(this, e);
+    };
+
+    resizeHandler = () => {
+      _resizeHandler.call(this);
+    };
   }
 
   if (typeof window.GridDrawer === 'undefined') {
