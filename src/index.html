@@ -89,7 +89,35 @@
     <script src="./js/grid-drawer.js"></script>
     <script>
       ;(function () {
-        const gridDrawer = new GridDrawer('#gridDrawer');
+        const gridDrawer = new GridDrawer('#gridDrawer', {
+          classNameItems: '.gd__item',
+          classNameOutside: '.gd__outside',
+          classNameInside: '.gd__inside',
+          animateEasing: 'easeInOutQuint',
+          animateTime: 600,
+          data: [
+            {
+              outside: `<p>01</p>`,
+              inside: `<p>01</p>`
+            },
+            {
+              outside: '<p>02</p>',
+              inside: '<p>02</p>'
+            },
+            {
+              outside: `<p>03</p>`,
+              inside: `<p>03</p>`
+            },
+            {
+              outside: '<p>04</p>',
+              inside: '<p>04</p>'
+            },
+            {
+              outside: `<p>05</p>`,
+              inside: `<p>05</p>`
+            }
+          ]
+        });
       })();
     </script>
   </body>

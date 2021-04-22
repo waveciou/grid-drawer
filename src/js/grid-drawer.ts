@@ -3,6 +3,7 @@ import '../scss/grid-drawer.scss';
 import config from './config';
 
 // * Components
+import buildElement from './components/buildElement';
 import creatElement from './components/creatElement';
 import setPosition from './components/setPosition';
 
@@ -10,6 +11,7 @@ import setPosition from './components/setPosition';
 import _clickHandler from './events/clickHandler';
 import _resizeHandler from './events/resizeHandler';
 
+// * InterFace
 declare global {
   interface Window {
     GridDrawer: any;
@@ -23,6 +25,7 @@ interface iConfig {
   classNameInside?: string;
   animateEasing?: string;
   animateTime?: number;
+  data?: [];
 }
 
 (function(Velocity) {
@@ -45,6 +48,7 @@ interface iConfig {
       this.EL = el;
       this.CONFIG = Object.assign(config, options);
 
+      const { classNameItems, classNameOutside, classNameInside } = this.CONFIG;
       const elementList: NodeList = document.querySelectorAll(el);
 
       if (elementList.length !== 1) {
@@ -55,8 +59,10 @@ interface iConfig {
       this.GD_CONTAINER = document.querySelector(el);
       this.GD_CONTAINER.classList.add('gd__container');
 
+      // * Build Elements
+      buildElement.call(this);
+
       // * Initialize
-      const { classNameItems, classNameOutside, classNameInside } = this.CONFIG;
       creatElement.call(this);
 
       this.GD_GROUPS = document.querySelectorAll(`${this.EL} .gd__group`);
