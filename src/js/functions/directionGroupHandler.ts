@@ -1,7 +1,8 @@
 export default function directionGroupHandler(elementList: NodeList, direction: number):HTMLElement[][] {
   const result: HTMLElement[][] = [];
+  const amount: number = elementList.length > 1 ? Math.round(elementList.length / 2) + 1 : 1;
 
-  for (let i = 0; i < Math.ceil(elementList.length / 2); i++) {
+  for (let i = 0; i < amount; i++) {
     const value: number = i * 2;
     let begin: number = value;
     let ended: number = value + 2;
