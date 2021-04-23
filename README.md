@@ -65,6 +65,37 @@ const gridDrawer = new GridDrawer('#gridDrawer', {
 });
 ```
 
+### 4. Create Elements From Data
+
+You can create the array of elements in configuration. It will be first to render HTML elements.
+
+```html
+<div id="gridDrawer"></div>
+```
+
+You must be setting HTML element of inside and outside in data list.
+
+```js
+  const gridDrawer = new GridDrawer('#gridDrawer', {
+    classNameItems: '.gd__item',
+    classNameOutside: '.gd__outside',
+    classNameInside: '.gd__inside',
+    animateEasing: 'easeInOutQuint',
+    animateTime: 600,
+    data: [
+      {
+        outside: `<p>Block 01</p>`,
+        inside: `<p>Contents of block 01</p>`
+      },
+      {
+        outside: '<p>Block 02</p>',
+        inside: '<p>Contents of block 02</p>'
+      },
+      ...
+    ]
+  });
+```
+
 ## Parameters
 
 | Parameter        | Type     | Default          | Description |
@@ -74,6 +105,7 @@ const gridDrawer = new GridDrawer('#gridDrawer', {
 | classNameInside  | string   | '.gd__inside'    | class name of inside div |
 | animateEasing    | string   | 'easeInOutQuint' | the animation easing name, you can get [here](http://velocityjs.org/#easing) to read more information |
 | animateTime      | number   | 600              | the animation duration |
+| data             | array    | undefined        | HTML elements list |
 
 ## Instance
 - [東北角國家風景區 - 美食單元](https://www.necoast-nsa.gov.tw/Food-Intro.aspx?a=126&l=1)
