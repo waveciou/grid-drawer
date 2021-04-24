@@ -16,6 +16,9 @@ export default function clickHandler(e: MouseEvent) {
   const element = (e.target as HTMLElement);
   const $item: HTMLElement = getParents(element, 'gd__item');
 
+  const className_OPENING = 'gd__is-open';
+  this.GD_CONTAINER.classList.remove(className_OPENING);
+
   if (element.closest(classNameOutside)) {
     if ($item.classList.contains('is-open')) {
       $item.classList.remove('is-open');
@@ -24,6 +27,7 @@ export default function clickHandler(e: MouseEvent) {
         (<HTMLElement>this.GD_ITEMS[i]).classList.remove('is-open');
       }
       $item.classList.add('is-open');
+      this.GD_CONTAINER.classList.add(className_OPENING);
     }
   } else if (element.classList.contains('close-btn')) {
     $item.classList.remove('is-open');
