@@ -38,48 +38,128 @@
         max-width: 1024px;
         margin: auto;
       }
+
+      .img-content {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .img-content img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+      }
+
+      .img-content::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #000;
+        opacity: 0;
+        transition: opacity 0.6s;
+      }
+
+      .gd__is-open .gd__item .img-content::after {
+        opacity: 0.5;
+      }
+
+      .gd__is-open .gd__item.is-open .img-content::after {
+        opacity: 0;
+      }
     </style>
 
     <div class="wrap">
       <div id="gridDrawer">
         <div class="gd__item">
-          <div class="gd__outside">Block 01</div>
+          <div class="gd__outside">
+            <figure class="img-content">
+              <img src="https://picsum.photos/seed/1/800/800" loading="lazy" >
+            </figure>
+          </div>
           <div class="gd__inside">Contents of block 01...</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">Block 02</div>
+          <div class="gd__outside">
+            <figure class="img-content">
+              <img src="https://picsum.photos/seed/2/800/800" loading="lazy" >
+            </figure>
+          </div>
           <div class="gd__inside">Contents of block 02...</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">Block 03</div>
+          <div class="gd__outside">
+            <figure class="img-content">
+              <img src="https://picsum.photos/seed/3/800/800" loading="lazy" >
+            </figure>
+          </div>
           <div class="gd__inside">Contents of block 03...</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">Block 04</div>
+          <div class="gd__outside">
+            <figure class="img-content">
+              <img src="https://picsum.photos/seed/4/800/800" loading="lazy" >
+            </figure>
+          </div>
           <div class="gd__inside">Contents of block 04...</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">Block 05</div>
+          <div class="gd__outside">
+            <figure class="img-content">
+              <img src="https://picsum.photos/seed/5/800/800" loading="lazy" >
+            </figure>
+          </div>
           <div class="gd__inside">Contents of block 05...</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">Block 06</div>
+          <div class="gd__outside">
+            <figure class="img-content">
+              <img src="https://picsum.photos/seed/6/800/800" loading="lazy" >
+            </figure>
+          </div>
           <div class="gd__inside">Contents of block 06...</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">Block 07</div>
+          <div class="gd__outside">
+            <figure class="img-content">
+              <img src="https://picsum.photos/seed/7/800/800" loading="lazy" >
+            </figure>
+          </div>
           <div class="gd__inside">Contents of block 07...</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">Block 08</div>
+          <div class="gd__outside">
+            <figure class="img-content">
+              <img src="https://picsum.photos/seed/8/800/800" loading="lazy" >
+            </figure>
+          </div>
           <div class="gd__inside">Contents of block 08...</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">Block 09</div>
+          <div class="gd__outside">
+            <figure class="img-content">
+              <img src="https://picsum.photos/seed/9/800/800" loading="lazy" >
+            </figure>
+          </div>
           <div class="gd__inside">Contents of block 09...</div>
         </div>
         <div class="gd__item">
-          <div class="gd__outside">Block 10</div>
+          <div class="gd__outside">
+            <figure class="img-content">
+              <img src="https://picsum.photos/seed/10/800/800" loading="lazy" >
+            </figure>
+          </div>
           <div class="gd__inside">Contents of block 10...</div>
         </div>
       </div>
