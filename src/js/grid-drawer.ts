@@ -43,6 +43,7 @@ interface iConfig {
     GD_ITEMS: NodeList;
     GD_INSIDES: NodeList;
     GD_OUTSIDES: NodeList;
+    GD_ORIGINAL_DOM: string;
 
     constructor (el: string, options?: iConfig) {
       this.EL = el;
@@ -52,12 +53,13 @@ interface iConfig {
       const elementList: NodeList = document.querySelectorAll(el);
 
       if (elementList.length !== 1) {
-        console.error('You must assign one element.');
+        console.error('You must be assign the element.');
         return;
       }
 
       this.GD_CONTAINER = document.querySelector(el);
       this.GD_CONTAINER.classList.add('gd__container');
+      this.GD_ORIGINAL_DOM = this.GD_CONTAINER.innerHTML;
 
       // * Build Elements
       buildElement.call(this);
@@ -85,6 +87,30 @@ interface iConfig {
     resizeHandler = () => {
       _resizeHandler.call(this);
     };
+
+    // * Methods
+    destroy(deleteInstance = true):null {
+      this.GD_CONTAINER.removeEventListener('click', this.clickHandler, false);
+      window.removeEventListener('resize', this.resizeHandler);
+
+      this.GD_CONTAINER.innerHTML = this.GD_ORIGINAL_DOM;
+      this.GD_CONTAINER.classList.remove('gd__container');
+      this.GD_CONTAINER.classList.remove('gd__is-open');
+
+      if (deleteInstance === true) {
+        const _instance: any = this;
+
+        Object.keys(_instance).forEach(key => {
+          try { _instance[key] = null; }
+          catch (e) { console.log(e); }
+
+          try { delete _instance[key]; }
+          catch (e) { console.log(e); }
+        });
+      }
+
+      return null;
+    }
   }
 
   if (typeof window.GridDrawer === 'undefined') {
