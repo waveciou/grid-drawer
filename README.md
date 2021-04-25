@@ -99,19 +99,19 @@ You must be setting HTML element of inside and outside in data list.
 ## Parameters
 
 | Parameter        | Type     | Default          | Description |
-| --------------   | -------- | ---------------- | ------------ |
+| --------------   | -------- | ---------------- | ----------- |
 | classNameItems   | string   | '.gd__item'      | class name of block item |
 | classNameOutside | string   | '.gd__outside'   | class name of outside div |
 | classNameInside  | string   | '.gd__inside'    | class name of inside div |
 | animateEasing    | string   | 'easeInOutQuint' | the animation easing name, you can get [here](http://velocityjs.org/#easing) to read more information |
 | animateTime      | number   | 600              | the animation duration |
-| data             | array    | undefined        | HTML elements list |
+| data             | array    |                  | HTML elements list |
 
 ## Methods
 
-| Method      | Description |
-| ----------- | ----------- |
-| destroy(deleteInstance) | Destroy instance and detach all events listeners. <br> **deleteInstance** -  Boolean, set it to `false` to not to delete instance, by default it is `true`. |
+| Method                  | Description |
+| ----------------------- | ----------- |
+| destroy(deleteInstance) | Destroy instance and detach all events listeners. <br> **deleteInstance** - Boolean, set it to `false` to not to delete instance, by default it is `true`. |
 ## Instance
 - [東北角國家風景區 - 美食單元](https://www.necoast-nsa.gov.tw/Food-Intro.aspx?a=126&l=1)
 - [台灣好湯網 - 泉質單元](https://taiwanhotspring.net/Quality-Intro.aspx?a=51&l=1)
