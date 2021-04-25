@@ -89,13 +89,27 @@ interface iConfig {
     };
 
     // * Methods
-    destroy() {
+    destroy(deleteInstance = true):null {
       this.GD_CONTAINER.removeEventListener('click', this.clickHandler, false);
       window.removeEventListener('resize', this.resizeHandler);
 
       this.GD_CONTAINER.innerHTML = this.GD_ORIGINAL_DOM;
       this.GD_CONTAINER.classList.remove('gd__container');
       this.GD_CONTAINER.classList.remove('gd__is-open');
+
+      if (deleteInstance === true) {
+        const _instance: any = this;
+
+        Object.keys(_instance).forEach(key => {
+          try { _instance[key] = null; }
+          catch (e) { console.log(e); }
+
+          try { delete _instance[key]; }
+          catch (e) { console.log(e); }
+        });
+      }
+
+      return null;
     }
   }
 
