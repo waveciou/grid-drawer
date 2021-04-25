@@ -10,7 +10,12 @@ interface iBuildElement {
 export default function buildElement():void {
   const { data, classNameItems, classNameOutside, classNameInside } = this.CONFIG;
 
-  if (Array.isArray(data) === false) return;
+  if (typeof data === 'undefined') return;
+
+  if (Array.isArray(data) === false) {
+    console.error('The data type must be array.');
+    return;
+  }
 
   const _data: iBuildElement[] = [...data];
 
@@ -29,7 +34,10 @@ export default function buildElement():void {
     return validator.every((valid: boolean) => valid === true);
   });
 
-  if (validResult === false) return;
+  if (validResult === false) {
+    console.error('You must be setting HTML element of inside and outside in data list.');
+    return;
+  }
 
   // * Build Element
   this.GD_CONTAINER.innerHTML = _data.reduce((prevElement: string, element: iBuildElement) => {
