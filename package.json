@@ -35,7 +35,7 @@
     "ignore-emit-webpack-plugin": "^2.0.6",
     "mini-css-extract-plugin": "^1.4.1",
     "node-sass": "^7.0.0",
-    "postcss": "^8.2.9",
+    "postcss": "^8.2.13",
     "postcss-loader": "^5.2.0",
     "pre-commit": "^1.2.2",
     "sass-loader": "^11.0.1",
