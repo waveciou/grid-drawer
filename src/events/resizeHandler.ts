@@ -1,10 +1,10 @@
 // * Components
-import setPosition from '../components/setPosition';
+import setPosition from "../components/setPosition";
 
 // * Tools
-import throttle from '../utils/throttle';
+import throttle from "../utils/throttle";
 
-export default function resizeHandler() {
+export default function resizeHandler(this: any) {
   throttle(() => {
     setPosition.call(this, window.innerWidth);
   }, 600).call(this);
