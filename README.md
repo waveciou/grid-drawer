@@ -6,7 +6,7 @@ The grid list plugin for JavaScript, because the effect just like drawer so name
 
 ## Demo
 
-[https://waveciou.github.io/grid-drawer](https://waveciou.github.io/grid-drawer/)
+[https://waveciou.github.io/grid-drawer](https://waveciou.github.io/grid-drawer/example.html)
 
 ## Usage
 
