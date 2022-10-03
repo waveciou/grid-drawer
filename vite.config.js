@@ -1,9 +1,9 @@
-import { resolve } from 'path';
-import { defineConfig } from 'vite';
+import { resolve } from "path";
+import { defineConfig } from "vite";
 
-const root = resolve(__dirname, 'src');
-const outDir = resolve(__dirname, 'dist');
-const projectName = 'grid-drawer';
+const root = resolve(__dirname, "src");
+const outDir = resolve(__dirname, "dist");
+const projectName = "grid-drawer";
 
 export default defineConfig({
   root,
@@ -13,18 +13,18 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       output: {
-        entryFileNames: `${projectName}.js`,
-        chunkFileNames: `[name].js`,
-        assetFileNames: ({ name = '' }) => {
-          if (/\.(gif|jpe?g|png|svg)$/.test(name)){
-            return `${projectName}.[ext]`;
+        entryFileNames: `js/${projectName}.js`,
+        chunkFileNames: `js/[name].js`,
+        assetFileNames: ({ name = "" }) => {
+          if (/\.(gif|jpe?g|png|svg)$/.test(name)) {
+            return "img/[name].[ext]";
           }
           if (/\.css$/.test(name)) {
-            return `${projectName}.[ext]`;
+            return `css/${projectName}.[ext]`;
           }
-          return `[name].[ext]`;
-        }
-      }
+          return "[name].[ext]";
+        },
+      },
     },
-  }
+  },
 });
