@@ -6,6 +6,8 @@ The grid list plugin for JavaScript, because the effect just like drawer so name
 
 ## Demo
 
+The demo website has deploy to [Netlify](Netlify).
+
 [https://waveciou-griddrawer.netlify.app/example.html](https://waveciou-griddrawer.netlify.app/example.html)
 
 ## Usage
