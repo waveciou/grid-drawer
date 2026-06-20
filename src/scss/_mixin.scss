@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 // * RWD Max Breakpoints
 @mixin max-width($breakpoints) {
   @media screen and (max-width: $breakpoints) {

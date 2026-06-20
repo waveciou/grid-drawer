@@ -7,11 +7,13 @@ const projectName = "grid-drawer";
 
 export default defineConfig({
   root,
+  base: "./",
   build: {
     outDir,
     assetsInlineLimit: 0,
     emptyOutDir: true,
     rollupOptions: {
+      input: resolve(root, "example.html"),
       output: {
         entryFileNames: `js/${projectName}.js`,
         chunkFileNames: `js/[name].js`,

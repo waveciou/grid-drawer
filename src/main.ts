@@ -47,7 +47,7 @@ interface iConfig {
 
     constructor(el: string, options?: iConfig) {
       this.EL = el;
-      this.CONFIG = Object.assign(config, options);
+      this.CONFIG = Object.assign({}, config, options);
 
       const { classNameItems, classNameOutside, classNameInside } = this.CONFIG;
       const elementList: NodeList = document.querySelectorAll(el);

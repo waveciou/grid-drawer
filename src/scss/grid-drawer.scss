@@ -1,5 +1,5 @@
 @charset 'UTF-8';
-@import './_mixin.scss';
+@use './mixin' as *;
 
 $border-color: #f3efdb;
 $border: 4px $border-color solid;
